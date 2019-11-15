@@ -1,8 +1,9 @@
-.grid {
+div.social-parent {
   overflow: hidden;
+  position: relative;
   margin-bottom: 80px;
   padding: 30px 0; }
-  .grid .overlay-white-fade {
+  div.social-parent .overlay-white-fade {
     background: linear-gradient(transparent, white);
     position: absolute;
     bottom: 0;
@@ -10,7 +11,7 @@
     display: block;
     width: 100%;
     z-index: 3; }
-  .grid .grid-item {
+  div.social-parent .grid .grid-item {
     float: left;
     background: #e7e7e7;
     width: 20%;
@@ -23,7 +24,7 @@
     &[data-instagram-id="1672725000673921503_1190672314"]{
     	display: none;
     }*/ }
-    .grid .grid-item.instagram-post:after {
+    div.social-parent .grid .grid-item.instagram-post:after {
       content: ' ';
       position: absolute;
       background: url("images/instagram.png") no-repeat;
@@ -33,7 +34,7 @@
       display: block;
       top: -10px;
       left: -10px; }
-    .grid .grid-item.index-tweet:after {
+    div.social-parent .grid .grid-item.index-tweet:after {
       content: ' ';
       position: absolute;
       background: url("images/twitter.png") no-repeat;
@@ -43,10 +44,10 @@
       display: block;
       top: -10px;
       left: -10px; }
-    .grid .grid-item > a {
+    div.social-parent .grid .grid-item > a {
       display: inline;
       clear: both; }
-    .grid .grid-item img {
+    div.social-parent .grid .grid-item img {
       width: 92%;
       height: inherit;
       margin: 10px;

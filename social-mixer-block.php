@@ -127,7 +127,7 @@ class social_mixer_block {
 		}
 
 		$classes_string       = implode( ' ', $classes );
-		$return_rendered_html .= "<div $style_html><section class='{$classes_string}' $style_html>";
+		$return_rendered_html .= "<div class='social-parent' $style_html><section class='{$classes_string}' $style_html>";
 
 		// loop through all our sources and build an array with all the posts
 		$social_mixer_posts = [];
@@ -153,11 +153,14 @@ class social_mixer_block {
 			$return_rendered_html .= $post->post_html();
 		}
 
+		$return_rendered_html .= "</section>";
+
 		// add a fade-out to a limit height, rather than a sharp cutoff
 		if ( ( $attributes[ 'limit_height' ] === true ) || ( $attributes[ 'limit_height' ] === 'true' ) ) {
 			$return_rendered_html .= "<div class='overlay-white-fade'>&nbsp;</div>";
 		}
-		$return_rendered_html .= "</section></div>";
+
+		$return_rendered_html .= "</div>";
 
 		return $return_rendered_html;
 
