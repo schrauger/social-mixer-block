@@ -17,8 +17,6 @@ const {__} = wp.i18n;
 const {apiFetch} = wp;
 
 
-
-
 // note: React components must start with a Capital letter
 
 
@@ -93,7 +91,6 @@ class social_mixer_block extends Component {
     };
 
 
-
     /**
      * Prevents users from clicking away from editor by clicking on a link in the server rendered post list.
      * @param event
@@ -142,7 +139,7 @@ class social_mixer_block extends Component {
                         checked={this.props.attributes.limit_height}
                         onChange={this.updateLimitHeight}
                     />
-                    { (this.props.attributes.limit_height)
+                    {(this.props.attributes.limit_height)
                         ?
                         <TextControl
                             type={'number'}
@@ -152,7 +149,7 @@ class social_mixer_block extends Component {
                             min={0}
                             step={10}
                         />
-                    :
+                        :
                         []
                     }
 

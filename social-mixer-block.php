@@ -11,7 +11,7 @@ License: GPL2
 require_once( 'includes/social-feed.php' );
 require_once( 'includes/instagram-feed.php' );
 require_once( 'includes/twitter-feed.php' );
-require_once( 'includes/social-options.php');
+require_once( 'includes/social-options.php' );
 
 class social_mixer_block {
 
@@ -55,36 +55,36 @@ class social_mixer_block {
 	public static function block_atts() {
 
 		return [
-			'twitter' => [
-				'type' => 'boolean',
+			'twitter'            => [
+				'type'    => 'boolean',
 				'default' => true
 			],
-			'instagram' => [
-				'type' => 'boolean',
+			'instagram'          => [
+				'type'    => 'boolean',
 				'default' => true
 			],
-			'text_only_mode'        => [
+			'text_only_mode'     => [
 				'type'    => 'boolean',
 				'default' => false
 				// when true, add a class to inhibit pictures
 			],
-			'max_posts'     => [
+			'max_posts'          => [
 				'type'    => 'integer',
 				'default' => 5
 			],
-			'max_excerpt_length'    => [
+			'max_excerpt_length' => [
 				'type'    => 'integer',
 				'default' => 55
 			],
-			'limit_height' => [
-				'type' => 'boolean',
+			'limit_height'       => [
+				'type'    => 'boolean',
 				'default' => true
 			],
-			'div_height' => [
-				'type' => 'integer',
+			'div_height'         => [
+				'type'    => 'integer',
 				'default' => 700
 			],
-			'className'             => [
+			'className'          => [
 				// this is the attribute created if the user chooses 'additional css class' for the block
 				'type'    => 'string',
 				'default' => ''
@@ -132,23 +132,23 @@ class social_mixer_block {
 		// loop through all our sources and build an array with all the posts
 		$social_mixer_posts = [];
 		if ( ( $attributes[ 'twitter' ] === true ) || ( $attributes[ 'twitter' ] === 'true' ) ) {
-			$source_posts = self::twitter_query( $attributes );
-			$social_mixer_posts = array_merge($social_mixer_posts, $source_posts);
+			$source_posts       = self::twitter_query( $attributes );
+			$social_mixer_posts = array_merge( $social_mixer_posts, $source_posts );
 		}
 
 		if ( ( $attributes[ 'instagram' ] === true ) || ( $attributes[ 'instagram' ] === 'true' ) ) {
-			$source_posts = self::instagram_query( $attributes );
-			$social_mixer_posts = array_merge($social_mixer_posts, $source_posts);
+			$source_posts       = self::instagram_query( $attributes );
+			$social_mixer_posts = array_merge( $social_mixer_posts, $source_posts );
 		}
 		// sort all the posts by date
-		$social_mixer_posts = self::sort_posts($social_mixer_posts);
+		$social_mixer_posts = self::sort_posts( $social_mixer_posts );
 		// trim down our array based on the max number we want to display
 
 		$social_mixer_posts = array_slice( $social_mixer_posts, 0, $attributes[ 'max_posts' ] );
 		// finally, print out all the posts
 		$i = 0;
-		foreach ($social_mixer_posts as $post) {
-			$i++;
+		foreach ( $social_mixer_posts as $post ) {
+			$i ++;
 			/* @var $post social_mixer_post */
 			$return_rendered_html .= $post->post_html();
 		}
@@ -157,35 +157,40 @@ class social_mixer_block {
 
 	}
 
-	public static function twitter_query($attributes){
-		$twitter_posts = get_transient("social-mixer-block-twitter-posts-{$attributes['max_posts']}");
-		if (!$twitter_posts){
-			$twitter_posts = twitter_feed::fetch_posts($attributes['max_posts']);
-			set_transient("social-mixer-block-twitter-posts{$attributes['max_posts']}", $twitter_posts, WP_FS__TIME_10_MIN_IN_SEC);
+	public static function twitter_query( $attributes ) {
+		$twitter_posts = get_transient( "social-mixer-block-twitter-posts-{$attributes['max_posts']}" );
+		if ( ! $twitter_posts ) {
+			$twitter_posts = twitter_feed::fetch_posts( $attributes[ 'max_posts' ] );
+			set_transient( "social-mixer-block-twitter-posts{$attributes['max_posts']}", $twitter_posts, WP_FS__TIME_10_MIN_IN_SEC );
 		}
+
 		return $twitter_posts;
 
 	}
 
-	public static function instagram_query($attributes){
+	public static function instagram_query( $attributes ) {
 		$instagram_posts = null;
-//		$instagram_posts = get_transient("social-mixer-block-instagram-posts-{$attributes['max_posts']}");
-		if (!$instagram_posts){
-			$instagram_posts = instagram_feed::fetch_posts($attributes['max_posts']);
-//			set_transient("social-mixer-block-instagram-posts{$attributes['max_posts']}", $instagram_posts, WP_FS__TIME_10_MIN_IN_SEC);
+		//		$instagram_posts = get_transient("social-mixer-block-instagram-posts-{$attributes['max_posts']}");
+		if ( ! $instagram_posts ) {
+			$instagram_posts = instagram_feed::fetch_posts( $attributes[ 'max_posts' ] );
+			//			set_transient("social-mixer-block-instagram-posts{$attributes['max_posts']}", $instagram_posts, WP_FS__TIME_10_MIN_IN_SEC);
 		}
+
 		return $instagram_posts;
 	}
 
 	/**
 	 * Takes all instagram and twitter posts (and any other types) and sorts them by date into one large array.
 	 * The newest post is first.
-	 * @param $array_of_all_posts socialfeedpost[] An array containing every post. You should use array_merge on all your feeds.
+	 *
+	 * @param $array_of_all_posts socialfeedpost[] An array containing every post. You should use array_merge on all
+	 *                            your feeds.
 	 *
 	 * @return socialfeedpost[]
 	 */
-	public static function sort_posts($array_of_all_posts){
-		usort($array_of_all_posts, "social_mixer_block::cmp");
+	public static function sort_posts( $array_of_all_posts ) {
+		usort( $array_of_all_posts, "social_mixer_block::cmp" );
+
 		return $array_of_all_posts;
 	}
 
@@ -195,11 +200,12 @@ class social_mixer_block {
 	 *
 	 * @return int
 	 */
-	public static function cmp($a, $b){
-		if ($a->get_date() == $b->get_date()) {
+	public static function cmp( $a, $b ) {
+		if ( $a->get_date() == $b->get_date() ) {
 			return 0;
 		}
-		return ($a->get_date() < $b->get_date()) ? 1 : -1;
+
+		return ( $a->get_date() < $b->get_date() ) ? 1 : - 1;
 	}
 }
 
