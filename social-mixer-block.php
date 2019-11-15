@@ -3,7 +3,7 @@
 Plugin Name: Social Mixer Block
 Plugin URI: https://github.com/schrauger/social-mixer-block
 Description: WordPress Block for embedding Twitter, Instagram, Facebook, and other social media posts.
-Version: 0.10
+Version: 1.0
 Author: Stephen Schrauger
 Author URI: https://github.com/schrauger/social-mixer-block
 License: GPL2
