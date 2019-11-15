@@ -108,7 +108,7 @@ class social_mixer_block {
 		$return_rendered_html = "";
 
 		// if text-only, set a class that css will use to hide images.
-		$classes   = [ 'social', 'grid' ];
+		$classes   = [ 'social', 'grid', 'container' ];
 		$text_only = false;
 		if ( ( $attributes[ 'text_only_mode' ] === true ) || ( $attributes[ 'text_only_mode' ] === 'true' ) ) {
 			$classes[] = 'text-only';
@@ -153,6 +153,10 @@ class social_mixer_block {
 			$return_rendered_html .= $post->post_html();
 		}
 
+		// add a fade-out to a limit height, rather than a sharp cutoff
+		if ( ( $attributes[ 'limit_height' ] === true ) || ( $attributes[ 'limit_height' ] === 'true' ) ) {
+			$return_rendered_html .= "<div class='overlay-white-fade'>&nbsp;</div>";
+		}
 		$return_rendered_html .= "</section></div>";
 
 		return $return_rendered_html;
