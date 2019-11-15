@@ -1,0 +1,39 @@
+{
+  "name": "social-mixer-block",
+  "version": "1.0.0",
+  "description": "",
+  "main": "social-mixer-block.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schrauger/social-mixer-block.git"
+  },
+  "author": "Stephen Schrauger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schrauger/social-mixer-block/issues"
+  },
+  "homepage": "https://github.com/schrauger/social-mixer-block#readme",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-stage-2": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.0.1",
+    "webpack": "^3.1.0"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "meow": "^5.0.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  },
+  "scripts": {
+    "build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
+    "dev": "cross-env BABEL_ENV=default webpack --watch"
+  }
+}
