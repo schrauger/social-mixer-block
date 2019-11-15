@@ -171,6 +171,11 @@ var social_mixer_block = function (_Component) {
             _this.props.setAttributes({ max_excerpt_length: max_excerpt_length });
         };
 
+        _this.updateHeight = function (max_height) {
+            max_height = parseInt(max_height);
+            _this.props.setAttributes({ max_height: max_height });
+        };
+
         _this.update_text_only_mode = function (text_only_mode) {
             _this.props.setAttributes({ text_only_mode: text_only_mode });
         };
@@ -209,11 +214,26 @@ var social_mixer_block = function (_Component) {
                     React.createElement(TextControl, {
                         type: 'number',
                         value: this.props.attributes.max_posts,
-                        label: 'How many posts to show',
+                        label: 'Max posts',
+                        help: 'How many posts to show',
                         onChange: this.updateMaxPosts,
                         min: 0,
                         max: 100,
                         step: 1
+                    }),
+                    React.createElement(TextControl, {
+                        type: 'number',
+                        value: this.props.attributes.height,
+                        label: 'Block max height (in pixels)',
+                        onChange: this.updateHeight,
+                        min: 0,
+                        step: 10
+                    }),
+                    React.createElement(ToggleControl, {
+                        label: this.props.attributes.text_only_mode ? 'Text-only mode (enabled)' : 'Text-only mode (disabled)',
+                        checked: this.props.attributes.text_only_mode,
+                        onChange: this.update_text_only_mode,
+                        help: this.props.attributes.text_only_mode ? 'Hide images from output' : 'Show images in output'
                     })
                 )
             ), React.createElement(
@@ -258,7 +278,8 @@ registerBlockType('schrauger/social-mixer-block', {
         instagram: { type: 'boolean', default: true },
         text_only_mode: { type: 'boolean', default: false },
         max_posts: { type: 'number', default: 5 },
-        max_excerpt_length: { type: 'number', default: 55 }
+        max_excerpt_length: { type: 'number', default: 55 },
+        height: { type: 'number', default: 500 }
     },
 
     edit: social_mixer_block,

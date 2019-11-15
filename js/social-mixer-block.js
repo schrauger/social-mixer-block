@@ -69,7 +69,6 @@ class social_mixer_block extends Component {
         this.props.setAttributes({instagram});
     };
 
-
     updateMaxPosts = (max_posts) => {
         max_posts = parseInt(max_posts);
         this.props.setAttributes({max_posts});
@@ -78,6 +77,11 @@ class social_mixer_block extends Component {
     updateMaxExcerptLength = (max_excerpt_length) => {
         max_excerpt_length = parseInt(max_excerpt_length);
         this.props.setAttributes({max_excerpt_length});
+    };
+
+    updateHeight = (max_height) => {
+        max_height = parseInt(max_height);
+        this.props.setAttributes({max_height});
     };
 
     update_text_only_mode = (text_only_mode) => {
@@ -121,11 +125,26 @@ class social_mixer_block extends Component {
                     <TextControl
                         type={'number'}
                         value={this.props.attributes.max_posts}
-                        label={'How many posts to show'}
+                        label={'Max posts'}
+                        help={'How many posts to show'}
                         onChange={this.updateMaxPosts}
                         min={0}
                         max={100}
                         step={1}
+                    />
+                    <TextControl
+                        type={'number'}
+                        value={this.props.attributes.height}
+                        label={'Block max height (in pixels)'}
+                        onChange={this.updateHeight}
+                        min={0}
+                        step={10}
+                    />
+                    <ToggleControl
+                        label={(this.props.attributes.text_only_mode ? 'Text-only mode (enabled)' : 'Text-only mode (disabled)')}
+                        checked={this.props.attributes.text_only_mode}
+                        onChange={this.update_text_only_mode}
+                        help={this.props.attributes.text_only_mode ? 'Hide images from output' : 'Show images in output'}
                     />
 
                 </PanelBody >
@@ -163,6 +182,7 @@ registerBlockType(
             text_only_mode: {type: 'boolean', default: false},
             max_posts: {type: 'number', default: 5},
             max_excerpt_length: {type: 'number', default: 55},
+            height: {type: 'number', default: 500}
         },
 
         edit: social_mixer_block,
