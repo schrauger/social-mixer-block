@@ -1,0 +1,55 @@
+.grid {
+  overflow: hidden;
+  margin-bottom: 80px;
+  padding: 30px 0; }
+  .grid .overlay-white-fade {
+    background: linear-gradient(transparent, white);
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+    display: block;
+    width: 100%;
+    z-index: 3; }
+  .grid .grid-item {
+    float: left;
+    background: #e7e7e7;
+    width: 20%;
+    margin-bottom: 25px;
+    font-size: .8em;
+    padding: 10px;
+    position: relative;
+    /* To change margin sides, use the 'gutter' parameter in the engine.js masonry grid declaration */
+    /*listing of individual postings to disregard
+    &[data-instagram-id="1672725000673921503_1190672314"]{
+    	display: none;
+    }*/ }
+    .grid .grid-item.instagram-post:after {
+      content: ' ';
+      position: absolute;
+      background: url("images/instagram.png") no-repeat;
+      background-size: cover;
+      width: 30px;
+      height: 30px;
+      display: block;
+      top: -10px;
+      left: -10px; }
+    .grid .grid-item.index-tweet:after {
+      content: ' ';
+      position: absolute;
+      background: url("images/twitter.png") no-repeat;
+      background-size: cover;
+      width: 30px;
+      height: 30px;
+      display: block;
+      top: -10px;
+      left: -10px; }
+    .grid .grid-item > a {
+      display: inline;
+      clear: both; }
+    .grid .grid-item img {
+      width: 92%;
+      height: inherit;
+      margin: 10px;
+      clear: both; }
+
+/*# sourceMappingURL=social-mixer-block.css.map */

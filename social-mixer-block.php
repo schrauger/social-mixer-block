@@ -76,9 +76,13 @@ class social_mixer_block {
 				'type'    => 'integer',
 				'default' => 55
 			],
-			'height' => [
+			'limit_height' => [
+				'type' => 'boolean',
+				'default' => true
+			],
+			'div_height' => [
 				'type' => 'integer',
-				'default' => 500
+				'default' => 700
 			],
 			'className'             => [
 				// this is the attribute created if the user chooses 'additional css class' for the block
@@ -104,7 +108,7 @@ class social_mixer_block {
 		$return_rendered_html = "";
 
 		// if text-only, set a class that css will use to hide images.
-		$classes   = [ 'social' ];
+		$classes   = [ 'social', 'grid' ];
 		$text_only = false;
 		if ( ( $attributes[ 'text_only_mode' ] === true ) || ( $attributes[ 'text_only_mode' ] === 'true' ) ) {
 			$classes[] = 'text-only';
@@ -117,8 +121,13 @@ class social_mixer_block {
 			$classes[] = $attributes[ 'className' ];
 		}
 
+		$style_html = '';
+		if ( ( $attributes[ 'limit_height' ] === true ) || ( $attributes[ 'limit_height' ] === 'true' ) ) {
+			$style_html = "style='height: {$attributes['div_height']}px !important;'";
+		}
+
 		$classes_string       = implode( ' ', $classes );
-		$return_rendered_html .= "<section class='{$classes_string}'>";
+		$return_rendered_html .= "<section class='{$classes_string}' $style_html>";
 
 		// loop through all our sources and build an array with all the posts
 		$social_mixer_posts = [];

@@ -171,9 +171,13 @@ var social_mixer_block = function (_Component) {
             _this.props.setAttributes({ max_excerpt_length: max_excerpt_length });
         };
 
-        _this.updateHeight = function (max_height) {
-            max_height = parseInt(max_height);
-            _this.props.setAttributes({ max_height: max_height });
+        _this.updateDivHeight = function (div_height) {
+            div_height = parseInt(div_height);
+            _this.props.setAttributes({ div_height: div_height });
+        };
+
+        _this.updateLimitHeight = function (limit_height) {
+            _this.props.setAttributes({ limit_height: limit_height });
         };
 
         _this.update_text_only_mode = function (text_only_mode) {
@@ -221,14 +225,20 @@ var social_mixer_block = function (_Component) {
                         max: 100,
                         step: 1
                     }),
-                    React.createElement(TextControl, {
+                    React.createElement(ToggleControl, {
+                        label: 'Limit height',
+                        help: 'Set a maximum height for this block',
+                        checked: this.props.attributes.limit_height,
+                        onChange: this.updateLimitHeight
+                    }),
+                    this.props.attributes.limit_height ? React.createElement(TextControl, {
                         type: 'number',
-                        value: this.props.attributes.height,
+                        value: this.props.attributes.div_height,
                         label: 'Block max height (in pixels)',
-                        onChange: this.updateHeight,
+                        onChange: this.updateDivHeight,
                         min: 0,
                         step: 10
-                    }),
+                    }) : [],
                     React.createElement(ToggleControl, {
                         label: this.props.attributes.text_only_mode ? 'Text-only mode (enabled)' : 'Text-only mode (disabled)',
                         checked: this.props.attributes.text_only_mode,
@@ -279,7 +289,8 @@ registerBlockType('schrauger/social-mixer-block', {
         text_only_mode: { type: 'boolean', default: false },
         max_posts: { type: 'number', default: 5 },
         max_excerpt_length: { type: 'number', default: 55 },
-        height: { type: 'number', default: 500 }
+        limit_height: { type: 'boolean', default: true },
+        div_height: { type: 'number', default: 700 }
     },
 
     edit: social_mixer_block,
