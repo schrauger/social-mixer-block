@@ -127,7 +127,7 @@ class social_mixer_block {
 		}
 
 		$classes_string       = implode( ' ', $classes );
-		$return_rendered_html .= "<section class='{$classes_string}' $style_html>";
+		$return_rendered_html .= "<div $style_html><section class='{$classes_string}' $style_html>";
 
 		// loop through all our sources and build an array with all the posts
 		$social_mixer_posts = [];
@@ -152,6 +152,8 @@ class social_mixer_block {
 			/* @var $post social_mixer_post */
 			$return_rendered_html .= $post->post_html();
 		}
+
+		$return_rendered_html .= "</section></div>";
 
 		return $return_rendered_html;
 
