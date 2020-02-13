@@ -50,7 +50,7 @@ class twitter_feed implements social_mixer_feed {
 				($obj_twitter->post_object->user->screen_name == 'ourmedschool') // only show tweets by us, not any likes or replies to our tweets.
 				&& (!($obj_twitter->post_object->retweeted_status)) // don't show any posts of ours that are retweets of other posts.
 				&& (!($obj_twitter->post_object->in_reply_to_status_id)) // don't show any posts of ours that are replies to other posts.
-				&& ( (!$obj_twitter->post_object->is_quote_status) || (twitterfeedpost::json_tweet_text_to_HTML( $obj_twitter->post_object ) > 10)) // show all non-quoted tweets, and only show quoted tweets if there's any substance (more than 10 characters, excluding links and hashtags)
+				&& ( (!$obj_twitter->post_object->is_quote_status) || (twitter_post::json_tweet_text_to_HTML( $obj_twitter->post_object ) > 10)) // show all non-quoted tweets, and only show quoted tweets if there's any substance (more than 10 characters, excluding links and hashtags)
 			){
 				$i++;
 				if ($i > $count) break; // only return a max of $count. since we fetch a lot more than $count (to account for retweets and other stuff), we have to ensure we only return $count or less.
@@ -123,7 +123,7 @@ class twitter_post implements social_mixer_post {
 				<div class='grid-item index-tweet white-box standard' data-twitter-id='{$this->post_object->id}'>
 			";
 		}
-		$return_html .= twitter::json_tweet_text_to_HTML( $this->post_object );
+		$return_html .= self::json_tweet_text_to_HTML( $this->post_object );
 		$return_html .= "
 					<div class='respond'>
 						<a class='reply' target='_blank' href='https://twitter.com/intent/tweet?in_reply_to={$this->post_object->id}'></a>
