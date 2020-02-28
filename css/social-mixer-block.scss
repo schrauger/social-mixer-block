@@ -30,7 +30,7 @@ div.social-parent {
 				display: none;
 			}*/
 
-			&.instagram-post:after {
+			&.image.instagram-post:after {
 				content: ' ';
 				position: absolute;
 				background: url('images/instagram.png') no-repeat;
@@ -42,7 +42,7 @@ div.social-parent {
 				left: -10px;
 			}
 
-			&.index-tweet:after {
+			&.image.index-tweet:after {
 				content: ' ';
 				position: absolute;
 				background: url('images/twitter.png') no-repeat;
@@ -68,3 +68,28 @@ div.social-parent {
 		}
 	}
 }
+
+@media screen and (max-width: 999px) {
+
+	div.social-parent {
+		.grid {
+			.grid-item {
+				width: 30%;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 650px) {
+
+	div.social-parent {
+		.grid {
+			.grid-item {
+				width: 90%;
+			}
+		}
+	}
+
+
+}
+
