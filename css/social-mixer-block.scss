@@ -23,6 +23,7 @@ div.social-parent {
 			font-size: .8em;
 			padding: 10px;
 			position: relative;
+			word-wrap: break-word;
 			/* To change margin sides, use the 'gutter' parameter in the engine.js masonry grid declaration */
 
 			/*listing of individual postings to disregard
@@ -30,25 +31,25 @@ div.social-parent {
 				display: none;
 			}*/
 
-			&.image.instagram-post:after {
+			&.instagram-post:after {
 				content: ' ';
 				position: absolute;
 				background: url('images/instagram.png') no-repeat;
 				background-size: cover;
-				width: 30px;
-				height: 30px;
+				width: 25px;
+				height: 25px;
 				display: block;
 				top: -10px;
 				left: -10px;
 			}
 
-			&.image.index-tweet:after {
+			&.index-tweet:after {
 				content: ' ';
 				position: absolute;
 				background: url('images/twitter.png') no-repeat;
 				background-size: cover;
-				width: 30px;
-				height: 30px;
+				width: 25px;
+				height: 25px;
 				display: block;
 				top: -10px;
 				left: -10px;
